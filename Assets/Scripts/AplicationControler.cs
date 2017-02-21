@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Threading;
 
 public class AplicationControler : MonoBehaviour {
+    public float escala = 1f;
     [HideInInspector] public List<Node> nodos;
     [HideInInspector] public List<Edge> aristas;
     public GameObject node;
@@ -47,22 +48,22 @@ public class AplicationControler : MonoBehaviour {
     void Vertexs(){
        foreach(Node nodo in nodos){
             if(nodo.valid){
-                GameObject obj = Instantiate(node, new Vector3(nodo.x, -1*nodo.y, 0f), transform.rotation) as GameObject;
+                GameObject obj = Instantiate(node, new Vector3(nodo.x, -1*nodo.y, 0f) * escala, transform.rotation) as GameObject;
                 nodo.esfera = obj;
                 nodo.esfera.transform.SetParent(transform);//se puede quitar
                 //nodo.esfera.GetComponent<Renderer>().material = nodeValid;
             }
             else{
-                GameObject obj = Instantiate(nodeI, new Vector3(nodo.x, -1*nodo.y, 0f), transform.rotation) as GameObject;
+                GameObject obj = Instantiate(nodeI, new Vector3(nodo.x, -1*nodo.y, 0f) * escala, transform.rotation) as GameObject;
                 nodo.esfera = obj;
                 nodo.esfera.transform.SetParent(transform);//se puede quitar
                 //nodo.esfera.GetComponent<Renderer>().material = nodeInvalid;
             }
             nodo.CopyTo();
             if(nodo.x > maxX)
-                maxX = nodo.x;
+                maxX = nodo.x * escala;
             if(nodo.y > maxY)
-                maxY = nodo.y;
+                maxY = nodo.y * escala;
             //aristas//debe ser en otra funcion por que aun no estan todos los vertices instancias, para obtener sus transform
             nodo.esfera.GetComponent<Nodo>().mostrarTexto();//esto debe estar en otro lado
         }

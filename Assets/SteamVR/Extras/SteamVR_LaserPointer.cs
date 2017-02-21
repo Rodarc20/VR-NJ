@@ -95,6 +95,7 @@ public class SteamVR_LaserPointer : MonoBehaviour
 
         if(previousContact && previousContact != hit.transform)
         {
+            //print("contacto");//se entra en este f cuando se termina el contacto
             PointerEventArgs args = new PointerEventArgs();
             if (controller != null)
             {
@@ -108,6 +109,7 @@ public class SteamVR_LaserPointer : MonoBehaviour
         }
         if(bHit && previousContact != hit.transform)
         {
+            print("Contacto");
             PointerEventArgs argsIn = new PointerEventArgs();
             if (controller != null)
             {
@@ -118,6 +120,12 @@ public class SteamVR_LaserPointer : MonoBehaviour
             argsIn.target = hit.transform;
             OnPointerIn(argsIn);
             previousContact = hit.transform;
+            //modificaciones propias
+            Nodo nodoS = previousContact.GetComponent<Nodo>();
+            if(nodoS){
+                nodoS.mostrarTexto();
+            }
+            
         }
         if(!bHit)
         {
